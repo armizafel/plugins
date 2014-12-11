@@ -1,0 +1,82 @@
+.tbStyle1
+{
+    padding: 16px;
+    background: #fff;
+    border: solid #989 1px;
+    font-family: arial;
+    letter-spacing: 0.5px;
+}
+.tbStyle1 table
+{
+    width: 100%;
+    border-collapse: collapse;
+    /*border: solid #c9c9c9 1px;*/
+}
+.tbStyle1 table .thead
+{    
+    /*background: #e7e7e7;*/
+    
+    color:#777;    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(241,241,241,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 100%); /* Chrome10+,Safari5.1+ */
+    text-align: center;
+    font-size: 9px;
+}
+.tbStyle1 table tr:not(:first-child) td
+{        
+    padding: 6px 8px;
+    font-size: 11px;
+    color: #444;
+    border-left: solid #fff 1px;
+}
+.tbStyle1 table tr:not(:first-child)
+{
+    border-top:solid #fff 1px;
+}
+.tbStyle1 tr:not(:first-child):hover
+{
+    background: #e7e7e7;
+}
+.tbStyle1 td input[type=text]
+{
+    width:95%;
+    outline: none;
+    padding: 2px 7px;
+    color: #353535;
+    letter-spacing: .5px;
+    border: solid #909090 1px;
+}
+.tbStyle1 td input[type=text]:focus
+{
+    border: solid #000 1px;
+}
+.tbStyle1 tr.selectTR
+{
+    background: #e7e7e7 !important;
+}
+.tbStyle1 tr td:last-child{
+    overflow: hidden;
+}
+.pgTable_panel
+{
+    float: right;
+    padding: 3px 10px 0px 5px;
+    margin-top: -28px;
+    position: relative;
+    background-color: rgba(64,149,239,.8);
+    height: 23px;
+    right: -100px;
+    border-radius: 5px 0 0 5px;
+    box-shadow: inset 0 0 13px -3px #206bbb;
+}
+.tbStyle1 .pgTable_panel img{
+    float:left;
+}
+.tbStyle1 .pbTable_btnEdit,.tbStyle1 .pbTable_btnDelete,.tbStyle1 .pbTable_btnAdd{
+    width:20px;height:20px;display:block;
+    margin: 0 3px;
+    background-size: 100%;
+    border: none;
+    outline: none;
+    opacity: .9;
+}

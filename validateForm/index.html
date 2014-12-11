@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<script type="text/javascript" src="../jquery171min.js"></script>
+<script type="text/javascript" src="jquery.validateForm_plugin.js"></script>
+<title>asdas</title>
+<script type="text/javascript">
+	$("document").ready(function(){
+		$("#form").validateForm();
+		$("#miboton").click(function(){
+			alert($.getFormErrors().length);
+
+		})
+	})
+</script>
+<style type="text/css">
+	.pgValFormError{
+		border:solid red 1px;
+	}
+</style>
+</head>
+<body>
+  <form id="form">
+  	<input type="text" class="pgText" />
+  	<input type="button" id="miboton"/>
+  </form>
+</body>
+</html>

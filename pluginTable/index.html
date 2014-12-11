@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="jquery.pluginTable_plugin.css">
+<script src="../jquery171min.js"></script>
+<script src="jquery.pluginTable_plugin.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $("#tableTmp").pluginTable({
+	  	callAdd:function(data){
+	  		console.log(data);
+	  		return 23;
+	  	},
+	  	callEdit: function(data){
+	  		console.log(data);
+	  		return true;
+	  	},
+	  	callDelete:function(data){
+	  		console.log(data);
+	  		return true;
+	  	}
+	  });
+	});
+</script>
+<meta charset=utf-8 />
+<title>jQuery pluginTable</title>
+</head>
+<body>
+	<div class="tbStyle1">
+	  	<table id="tableTmp">
+	  		<tr class="thead"><td id="pgTable_nameTD-telefoo">nombre</td><td id="pgTable_nameTD-asdasd">correo</td><td id="pgTable_nameTD-calle">ciudad</td></tr>
+		    <tr><td>qwe qw eqwe qw</td><td>a sdas das da</td><td>asdas</td></tr>
+		    <tr><td>qwe qw eqwe qw</td><td>a sdas das da</td><td>asdas</td></tr>
+		    <tr><td>qwe qw eqwe qw</td><td>a sdas das da</td><td>asdas</td></tr>
+		    <tr><td>qwe qw eqwe qw</td><td>a sdas das da</td><td>asdas</td></tr>
+		    <tr><td>qwe qw eqwe qw</td><td>a sdas das da</td><td>asdas</td></tr>
+		    <tr><td>qwe qw eqwe qw</td><td>a sdas das da</td><td>asdas</td></tr>
+  		</table>
+	</div>
+</body>
+</html>

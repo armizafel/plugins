@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Caja</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="js/jquery.autocomplete_plugin.js"></script>
+<script type="text/javascript">
+	function onReady(){
+
+		/*Script para las pestañas*/
+		var objList = document.querySelectorAll("#menu .tabHeaders li")
+
+		for(var x = 0; x < objList.length;x++){
+			objList[x].onclick = function(){
+				var nameTab = this.getAttribute("class");	
+				var objBodyTab = document.querySelectorAll("#menu .body div");
+				/*oculta todos los bodyTab*/
+				for(var y = 0; y < objBodyTab.length;y++){
+					objBodyTab[y].style.display = "none";
+				}
+				/*muestra el bodyTab seleccionado*/
+				document.querySelector("#menu .body div."+nameTab).style.display = "block";
+			};	
+		}		
+		/*************************/	
+
+	}
+
+	var total = 0;
+	var arrProdVenta = new Array();
+	var arrListIngredientes = [{idIngre: 1,nombre:"aguacate"},{idIngre:10,nombre:"alguna cosa"}];
+	$(document).ready(function(){
+
+		/*Agregar productos a la lista de venta*/
+		$("#menu .body li").click(function(){
+			var nombre = $(this).children("span.infoProd").children(".prodNombre").text();
+			var precio = $(this).children("span.infoProd").children(".prodPrecio").text();
+			var ingre = $(this).children("span.infoProd").children(".prodIngredientes").text();
+			
+			var listIngre = "<li><span style='width:99%;display:inline-block'><input type='text' class='txtNewIngre' style='width:99%;' /></span></li>";
+			//obtener los ingredientes
+			$.each(ingre.split("|"),function(index,item){
+				listIngre += "<li class='idingre-"+item.split("-")[0]+"'><span style='width:70%;display:inline-block'>"+item.split("-")[1]+"</span><span style='width:29%;display:inline-block; text-align:center'><span class='btnMenos' onclick='cantIngrediente(0,this)'>-</span><input type='text' readonly class='txtCantIngre' value='1' style='width:25px;text-align:center;'/><span class='btnMas' onclick='cantIngrediente(1,this)'>+</span></span></li>";
+			})
+			
+			$("#detalleVenta > ul > li").addClass("accClose");
+			var objProd = $("<li onclick='openAcc(this)'>"+
+					"<span style='display: block;padding: 5px;'><span class='lstVenNombre' style='display: inline-block;width: 70%;'>"+nombre+"</span><span class='lstVenPrecio' style='display: inline-block;width: 29%; text-align:center'>"+precio+"</span></span>"+
+					"<ul>"+listIngre+"</ul>"+
+				"</li>")
+			$("#detalleVenta ul.listVenta").append(objProd);
+			/* inicio de autocomplete */
+			var objNewIngre = $("#detalleVenta ul.listVenta").find(".txtNewIngre")
+			$.each(objNewIngre,function(index,item){
+				$(item).autoComplete({source:arrListIngredientes,
+						nameSearch:"nombre",
+						value:"idIngre"},
+						function(e){												
+							if($(item).parent().parent().siblings(".idingre-"+e.value).length == 0){
+								$(item).parent().parent("li").parent("ul").append("<li class='idingre-"+e.value+"'><span style='width:70%;display:inline-block'>"+e.name+"</span><span style='width:29%;display:inline-block; text-align:center'><span class='btnMenos' onclick='cantIngrediente(0,this)'>-</span><input type='text' readonly class='txtCantIngre' value='1' style='width:25px;text-align:center;'/><span class='btnMas' onclick='cantIngrediente(1,this)'>+</span></span></li>")
+							}
+						});	
+			})
+			
+			total += +(precio);
+		});		
+		
+		/***************************************/
+	})
+function openAcc(obj){	
+	if($(obj).hasClass("accClose")){
+		var autoHeight = $(obj).css('height', 'auto').height();
+		
+		$("#detalleVenta > ul > li").addClass("accClose");
+		$(obj).removeClass("accClose");
+	}
+}
+function cantIngrediente(mode,obj){
+	/* cada ingrediente extra 5 pesos mas */
+	var objSib = $(obj).siblings(".txtCantIngre");
+	if(mode == 1){
+		$(objSib).val(+($(objSib).val())+1);
+		total += 5;
+	}else if (mode == 0){		
+		if($(objSib).val() > 0){
+			$(objSib).val(+($(objSib).val())-1);
+		}	
+	};
+}
+
+
+</script>
+<style type="text/css">
+	.lstVenNombre{
+
+	}
+	.accClose{
+		height: 30px !important;
+		overflow: hidden;
+	}
+	.acLiActive{
+		background: #e7e7e7 !important;
+	}
+	.pluginAutoComplete ul{
+		padding: 0;
+		margin: 0;
+		background: #fff;
+	}
+	.pluginAutoComplete li{
+		list-style: none;
+		background: #fff;
+		padding: 3px;
+		margin: 0 2px;
+		cursor: pointer;
+	}
+	.pluginAutoComplete li:hover{		
+		background: #e7e7e7;		
+	}
+</style>
+</head>
+<body onload="onReady()">
+
+	<!-- HTML para el acordion de productos -->
+	<div id="detalleVenta">
+		<ul class="listVenta">
+
+		</ul>
+	</div>
+	<!-- ////////////////////////////////// -->
+<hr>
+	<!-- HTML de las categorias en pestañas -->
+	<div id="menu">
+		<div class="tabHeaders">
+			<ul>
+				<li class="tab1">tab1</li>
+				<li class="tab2">tab2</li>
+				<li class="tab3">tab3</li>
+			</ul>
+		</div>
+		<div class="body">
+			<div class="tab1"> 
+				<ul>
+					<li>
+						info prod
+						<span style="display:none" class="infoProd">
+							<span class="prodNombre">sushi mar/tierra</span>
+							<span class="prodPrecio">50</span>
+							<span class="prodIngredientes">1-aguacate|2-res|3-camaron|4-queso</span>
+						</span>
+					</li>
+					<li>
+						info prod 2
+						<span style="display:none" class="infoProd">
+							<span class="prodNombre">sushi cordon</span>
+							<span class="prodPrecio">80</span>
+							<span class="prodIngredientes">1-aguacate|3-camaron|4-queso|5-alga</span>
+						</span>
+					</li>
+				</ul> 
+			</div>
+			<div class="tab2"> tab2 </div>
+			<div class="tab3"> tab3 </div>
+		</div>
+	</div>
+	<!-- ///////////////////////////////// -->
+</body>
+</html>
