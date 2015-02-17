@@ -8,7 +8,6 @@
 <title>asdas</title>
 <script type="text/javascript">
 	$("document").ready(function(){
-        $("#aaaa").validateForm("chkEmpty");;
 		$("#form").validateForm();
         $("#form2").validateForm();
         $("#form3").validateForm();
@@ -84,12 +83,12 @@ a.tooltips span:after {
 </head>
 <body>
   <form id="form">
-  	<input type="text" class="pgNum pgMax-5" id="0000"/>
+	    <input type="text" class="pgNum pgMax-5 pgReq" id="0000"/>
       <div>
-        <input type="text" class="pgReq pgAlfa" />
+        <input type="password" class="pgReq pgAlfa" />
       </div>
       
-  	<input type="button" id="miboton"/>
+  	<input type="button" id="miboton" value="asda"/>
   </form>
     <form id="form2">
   	<input type="text" class="pgNum" id="aaaa"/>
