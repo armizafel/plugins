@@ -4,10 +4,11 @@
 <meta charset=utf-8 />
     <link href="bootstrap.min.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="../jquery171min.js"></script>
-<script type="text/javascript" src="jquery.validateForm_plugin.2.0.min.js"></script>
+<script type="text/javascript" src="jquery.validateForm_plugin.2.0.js"></script>
 <title>asdas</title>
 <script type="text/javascript">
 	$("document").ready(function(){
+        $("#aaaa").validateForm("chkEmpty");;
 		$("#form").validateForm();
         $("#form2").validateForm();
         $("#form3").validateForm();
@@ -85,7 +86,7 @@ a.tooltips span:after {
   <form id="form">
   	<input type="text" class="pgNum pgMax-5" id="0000"/>
       <div>
-        <input type="text" class="pgReq pgRFC" />
+        <input type="text" class="pgReq pgAlfa" />
       </div>
       
   	<input type="button" id="miboton"/>

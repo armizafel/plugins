@@ -21,7 +21,7 @@
             msg : "El formato del RFC es incorrecto"
         },
         pgAlfa : {
-            regEx : /^[0-9a-zA-z-_?=)(\/%$#+-.;: @]+$/,
+            regEx : /^[0-9a-zA-z-_?=)(\/%$#+-.;: @&]+$/,
             msg : "No se pueden escribir caracteres especiales"
         },
         pgNumOnly : {
@@ -111,7 +111,6 @@
             methods.putError.apply($this,[it]);
             showTooltip(it,"La cantidad de caracteres es incorrecta");                    
         } else {
-            debugger;
             if(!isExist($this,idElement)){
                 resetInput($this,it);
             }
@@ -160,7 +159,7 @@
         init : function(options) {
             return this.each(function(index){                
                 $this = $(this);
-                generateIds($this.find("input[type=text]"));
+                generateIds($this.find("input, textarea"));
                 var data = $this.data(pluginName);               
                 if (!data){
                     var settings = {
@@ -204,6 +203,17 @@
         },
         removeError: function (IdElement) {            
             resetInput($(this),$("#"+IdElement));
+        },
+        chkEmpty: function(){            
+            if ($(this).val() === "") {
+                showTooltip(this,msgErrorEmptyElement);
+                $(this).addClass(nameClassError);
+                return false;
+            } else {                        
+                $(this).removeClass(nameClassError);
+                $(this).siblings(".tooltips").remove();
+                return true;
+            }            
         }
     };
     // ***** Fin: Public Methods *****
