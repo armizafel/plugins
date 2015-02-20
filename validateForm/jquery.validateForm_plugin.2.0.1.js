@@ -6,7 +6,8 @@
         tmpTooltip = "<a class='tooltips' href='javascript:;' onclick='$(this).remove();' tabindex='-1'><span></span></a>",
         nameClassError = "alert-danger",
         msgErrorEmptyElement = "El campo no puede estar vacio",
-        inputsSearch = "input, textarea";
+        inputsSearch = "input, textarea",
+        estatus = false;
     
     var objValidation = {
         pgTextOnly : {
@@ -188,7 +189,31 @@
                         valResp = false;
                         showTooltip(item,msgErrorEmptyElement);
                         methods.putError.apply($this,[item]);
-                    } else {                        
+                    } else {       
+                        
+                        resetInput($this,item);
+                    }
+                }
+            });
+            return valResp;
+        },
+        chkEquals: function () {
+            var valResp = true,
+                $this = $(this),
+                idInput = "";
+            $this.find(inputsSearch).each(function (index, item) {
+                if ($(item).is('[class*="pgEqls-"]')) 
+                {
+                    var clases = $(item).attr("class").split(" ");
+                    for (itemKey in clases) {
+                        if (clases[itemKey].indexOf("pgEqls-") !== -1) idInput = clases[itemKey].split("-")[1];                    
+                    }
+                    if ($(item).val() !== $("#"+idInput).val()) {
+                        valResp = false;
+                        showTooltip(item,"Las casillas no coinciden");
+                        methods.putError.apply($this,[item]);
+                    } else {       
+                        
                         resetInput($this,item);
                     }
                 }
@@ -215,6 +240,11 @@
                 $(this).siblings(".tooltips").remove();
                 return true;
             }            
+        },
+        showMyTooltip: function($inpute,msg){
+            showTooltip($inpute,msg);
+            methods.putError.apply(this,[$inpute]);
+            return true;         
         }
     };
     // ***** Fin: Public Methods *****
